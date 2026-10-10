@@ -631,18 +631,6 @@ $$("[data-step]").forEach(el => io.observe(el));
   $("#mq").innerHTML = group + group + group + group;
 })();
 
-/* الفيديو */
-(function () {
-  const url = CONFIG.videoUrl.trim();
-  if (!url) return;
-  const yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})/);
-  const vm = url.match(/vimeo\.com\/(\d+)/);
-  const at = 'title="فيديو تعريفي بأحمد المحمد" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"';
-  $("#videoFrame").innerHTML = yt ? `<iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}?rel=0" ${at}></iframe>`
-    : vm ? `<iframe src="https://player.vimeo.com/video/${vm[1]}" ${at}></iframe>`
-    : `<video src="${url}" controls playsinline preload="metadata"></video>`;
-})();
-
 /* صورة المدرب */
 (function () {
   const img = $("#coachImg"), frame = $("#coachFrame");

@@ -357,19 +357,20 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     <h1 class="hero__name gold-w" data-split>أحمد المحمد</h1>
     <p class="hero__lead" data-h style="--d:.45s">أساعد المدراء والموظفين والخريجين على تجاوز التحديات المهنية وبناء مسار وظيفي ناجح</p>
 
-    <div class="video" data-h style="--d:.65s">
-      <div class="tiltable" data-tilt>
-        <div class="video__ring">
-          <div class="video__frame" id="videoFrame">
-            <div class="video__empty">
-              <span class="play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M8 4.5v15l12-7.5z"/></svg></span>
-              <span>الفيديو التعريفي</span>
-            </div>
-          </div>
-        </div>
+  <div class="video" data-h style="--d:.65s">
+  <div class="tiltable" data-tilt>
+    <div class="video__ring">
+      <div class="video__frame" id="videoFrame">
+        <iframe
+          src="https://player.cloudinary.com/embed/?cloud_name=dkabwxt8&public_id=Final_03"
+          title="فيديو تعريفي بأحمد المحمد"
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+          allowfullscreen
+          frameborder="0"></iframe>
       </div>
     </div>
-
+  </div>
+</div>
     <div class="hero__cta" data-h style="--d:.85s">
       <a class="cta" data-book href="https://calendly.com/ahmeed-coach" target="_blank" rel="noopener">
         <span class="cta__body">
@@ -592,7 +593,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 const CONFIG = {
   bookingUrl: "https://calendly.com/ahmeed-coach",
   // رابط الفيديو: يوتيوب أو فيميو أو ملف mp4. اتركه فارغًا لإظهار مكان الفيديو.
-  videoUrl: "https://res.cloudinary.com/dkabwxt8/image/upload/v1791625392/Final_03_poster.jpg",
+ 
   // صورة المدرب: يفضّل عمودية 4:5، أو PNG بخلفية شفافة (قصّ احترافي)
   coachPhoto: "img/ahmed.jpg",
   // صور آراء العملاء بالترتيب، مثال: ["images/t1.jpg","images/t2.jpg"]

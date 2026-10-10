@@ -272,6 +272,25 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .prog{height:3px;background:rgba(4,15,12,.15);border-radius:3px;overflow:hidden;margin-top:.4rem}
 .prog i{display:block;height:100%;background:var(--gold);transform:scaleX(.1);transform-origin:right;transition:transform .2s}
 
+
+
+
+
+.slide--quote{--soft:#A9BDB4;width:380px;max-width:85vw;padding:2rem 1.8rem;display:flex;flex-direction:column;justify-content:space-between;gap:1.6rem;background:linear-gradient(165deg,var(--em8),var(--obs));color:var(--ivory);border-color:rgba(232,192,99,.55)}
+.slide--quote .q{width:44px;height:44px;color:var(--g2)}
+.slide--quote blockquote{font-family:var(--display);font-weight:500;font-size:1.3rem;line-height:1.85}
+.slide--quote figcaption{display:flex;flex-direction:column;border-top:1px solid rgba(232,192,99,.3);padding-top:1rem}
+.slide--quote figcaption b{font-family:var(--display);font-size:1.15rem;color:var(--g1)}
+.slide--quote figcaption span{color:var(--soft);font-size:.95rem}
+
+
+
+
+
+
+
+
+
 /* ===== الأسئلة ===== */
 .faq{max-width:52rem;margin:3rem auto 0}
 .faq__i{border-bottom:1px solid rgba(232,192,99,.25)}
@@ -593,11 +612,29 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 const CONFIG = {
   bookingUrl: "https://calendly.com/ahmeed-coach",
   // رابط الفيديو: يوتيوب أو فيميو أو ملف mp4. اتركه فارغًا لإظهار مكان الفيديو.
- 
   // صورة المدرب: يفضّل عمودية 4:5، أو PNG بخلفية شفافة (قصّ احترافي)
   coachPhoto: "img/ahmed.jpg",
   // صور آراء العملاء بالترتيب، مثال: ["images/t1.jpg","images/t2.jpg"]
-  testimonials: []
+ 
+testimonials: [
+  {
+    text: "كنت محتار في خطوتي المهنية القادمة، وما كنت عارف كيف أحدد هدفي بشكل واضح. مع كوتش أحمد بدأت أفهم نقاط قوتي وأرتب أولوياتي، وطلعت من الجلسات بخطة عملية أقدر أشتغل عليها.",
+    name: "محمد العتيبي",
+    role: "موظف في القطاع الخاص"
+  },
+  {
+    text: "أكثر شيء استفدت منه هو طريقة طرح الأسئلة اللي خلتني أشوف وضعي المهني من زاوية مختلفة. الجلسات كانت منظمة وعملية، والأهم أني بدأت أطبق الأشياء اللي اتفقنا عليها بدل ما أظل أفكر بدون خطوات واضحة.",
+    name: "سارة الحربي",
+    role: "أخصائية موارد بشرية"
+  },
+  {
+    text: "كنت أفكر أغير مساري الوظيفي، لكن عندي تردد وخوف من اتخاذ القرار. كوتش أحمد ساعدني أرتب أفكاري وأحدد الخيارات المناسبة لي، وصرت أكثر وضوحًا بشأن الخطوة اللي أبغى أبدأ فيها.",
+    name: "خالد القحطاني",
+    role: "مهندس"
+  }
+]
+
+
 };
 /* ================================================================= */
 
@@ -739,14 +776,22 @@ $$(".faq__q").forEach(q => q.addEventListener("click", () => {
 }));
 
 /* سلايدر آراء العملاء */
+
 (function () {
   const slider = $("#slider"), track = $("#track"), prev = $("#prevBtn"), next = $("#nextBtn"), prog = $("#prog");
-  const imgs = CONFIG.testimonials;
-  if (imgs.length) {
-    imgs.forEach(src => {
+
+  const items = CONFIG.testimonials;
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  if (items.length) {
+    items.forEach(it => {
       const f = document.createElement("figure");
-      f.className = "slide";
-      f.innerHTML = `<img src="${src}" alt="رأي أحد العملاء" loading="lazy" draggable="false">`;
+      if (typeof it === "string") {
+        f.className = "slide";
+        f.innerHTML = `<img src="${esc(it)}" alt="رأي أحد العملاء" loading="lazy" draggable="false">`;
+      } else {
+        f.className = "slide slide--quote";
+        f.innerHTML = `<svg class="q" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 17.5C4 13 6 9.8 9.8 8l.9 1.4C8.6 10.6 7.6 12 7.5 13.5H10V19H4zm9 0C13 13 15 9.8 18.8 8l.9 1.4c-2.1 1.2-3.1 2.6-3.2 4.1H19V19h-6z"/></svg><blockquote>${esc(it.text)}</blockquote><figcaption><b>${esc(it.name || "")}</b><span>${esc(it.role || "")}</span></figcaption>`;
+      }
       track.appendChild(f);
     });
   } else {
